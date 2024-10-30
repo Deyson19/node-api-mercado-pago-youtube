@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MercadoPago-NODEJS</title>
+
+    <!-- Bootwatch CDN -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootswatch@5.3.3/dist/lumen/bootstrap.min.css"
+    />
+  </head>
+  <body class="bg-dark">
+    <div class="container">
+      <div class="card bg-success-subtle">
+        <div class="card-header">
+          <h2 class="text-center text-info">Mercado Pago - NODEJS</h2>
+          <p>
+            Integrar la pasarela de pagos online "Mercado Pago" en REST API con
+            NodeJS.
+          </p>
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">Ir a MercadoPago</h5>
+          <button id="checkout" class="btn btn-md btn-success">
+            Realizar Pago
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const checkoutButton = document.getElementById("checkout");
+
+      checkoutButton.addEventListener("click", async () => {
+        const res = await fetch("/api/pago/create", {
+          method: "POST",
+        });
+        const data = await res.json();
+        console.log("Respuesta:", data);
+        setTimeout(() => {
+          window.location.href = data.url;
+        }, 5000);
+      });
+    </script>
+  </body>
+</html>
